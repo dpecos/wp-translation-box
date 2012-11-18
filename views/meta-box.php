@@ -1,27 +1,40 @@
 <?php 
 global $post;
 ?>
+<style>
+#untranslated_text {
+	margin-bottom: 5px;
+} 
+#translated_text {
+	background-color: #F5F5F5;
+	margin-bottom: 5px; 
+	color: #888888; 
+	font-style: italic
+}
+</style>
 <script src="https://www.google.com/jsapi?key=AIzaSyCHN5MMkFj4oGXrLc24XWGRM2XNtjiIYmI"></script>
 <script>
 google.load("language", "1");
 
 function wptranslationbox_translate() {
     untranslated_text = jQuery('#untranslated_text').val();
-   
-    google.language.translate(untranslated_text, jQuery('#source_lang').val(), jQuery('#dest_lang').val(), function(result) {
-        if (!result.error) {
-            jQuery('#translated_text').attr("value", result.translation);
-        } else {
-            alert(result.error.code + ": " + result.error.message);
-        }
-      });
 
+    if (untranslated_text != "") {
+		google.language.translate(untranslated_text, jQuery('#source_lang').val(), jQuery('#dest_lang').val(), function(result) {
+	    	if (!result.error) {
+	            jQuery('#translated_text').attr("value", result.translation);
+	        } else {
+	            alert(result.error.code + ": " + result.error.message);
+	        }
+	    });
+    }
 }
 
 function wptranslationbox_switch() {
 	tmp = jQuery('#source_lang').val();
 	jQuery('#source_lang').attr("value", jQuery('#dest_lang').val());
 	jQuery('#dest_lang').attr("value", tmp);
+	//wptranslationbox_translate();
 }
 
 function wptranslationbox_clear() {
@@ -49,7 +62,18 @@ jQuery(document).ready(function() {
     ?>
 
     jQuery('#source_lang').html(output.join('')).attr("value", "<?php echo $source_lang ?>").css("width", "8em").css("margin-bottom", "5px");
-    jQuery('#dest_lang').html(output.join('')).attr("value", "<?php echo $target_lang ?>").css("width", "8em").css("margin-bottom", "5px");;
+    jQuery('#dest_lang').html(output.join('')).attr("value", "<?php echo $target_lang ?>").css("width", "8em").css("margin-bottom", "5px");
+
+    jQuery('#untranslated_text').focus(function() {
+    	jQuery('#untranslated_text').css("background-color", "lightyellow"); 
+    }).blur(function() {
+    	jQuery('#untranslated_text').css("background-color", "white");
+    }).keypress(function(e) {
+    	if (e.which == 13) {
+    		wptranslationbox_translate();
+        	e.preventDefault();
+        }
+    });
   
 });
 
@@ -62,12 +86,12 @@ function selectAll (textarea) {
 
 <div>
     <label for="untranslated_text">Original:</label>
-    <textarea id="untranslated_text" cols="27" rows="2" style="margin-bottom:5px"></textarea>
+    <textarea id="untranslated_text" cols="27" rows="2"></textarea>
 </div>
 
 <div>
     <label for="translated_text">Translated:</label>
-    <textarea id="translated_text" cols="27" rows="2" style="margin-bottom:5px; color:grey; font-style:italic" readonly="true" onClick="selectAll(this);"></textarea>
+    <textarea id="translated_text" cols="27" rows="2" readonly="true" onClick="selectAll(this);"></textarea>
 </div>
 
 <div>

@@ -43,10 +43,17 @@ Not at all.
 
 == Changelog ==
 
+= 1.1 =
+* Usability improvements
+* Fix: avoid to translate empty string
+
 = 1.0 =
 * First stable release.
 
 == Upgrade Notice ==
+
+= 1.1 = 
+Usability improvements: now you can translate just pressing "enter" key
 
 = 1.0 =
 Initial release.

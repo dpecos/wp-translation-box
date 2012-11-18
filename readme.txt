@@ -3,7 +3,7 @@ Contributors: dpecos
 Donate link: http://danielpecos.com/projects/wp-googletranslate-box/
 Tags: translation, editor, google, translate
 Requires at least: 3.0.0
-Tested up to: 3.0.1
+Tested up to: 3.0.5
 Stable tag: trunk
 
 Displays a box in the "Add New Post" page that allows you to quickly translate 
@@ -43,6 +43,9 @@ Not at all.
 
 == Changelog ==
 
+= 1.2 =
+* More usability improvements (translation is also done on input focus out)
+
 = 1.1 =
 * Usability improvements
 * Fix: avoid to translate empty string
@@ -51,6 +54,9 @@ Not at all.
 * First stable release.
 
 == Upgrade Notice ==
+
+= 1.2 =
+Usability improvements: translation is also done when input looses focus
 
 = 1.1 = 
 Usability improvements: now you can translate just pressing "enter" key

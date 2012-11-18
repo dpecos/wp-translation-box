@@ -16,6 +16,8 @@ global $post;
 <script>
 google.load("language", "1");
 
+var is_text_modified = false;
+
 function wptranslationbox_translate() {
     untranslated_text = jQuery('#untranslated_text').val();
 
@@ -28,6 +30,8 @@ function wptranslationbox_translate() {
 	        }
 	    });
     }
+
+    is_text_modified = false;
 }
 
 function wptranslationbox_switch() {
@@ -69,9 +73,15 @@ jQuery(document).ready(function() {
     }).blur(function() {
     	jQuery('#untranslated_text').css("background-color", "white");
     }).keypress(function(e) {
-    	if (e.which == 13) {
+    	is_text_modified = true;
+        if (e.which == 13) {
     		wptranslationbox_translate();
         	e.preventDefault();
+        }
+    }).focusout(function(e) {
+        if (is_text_modified) {
+            wptranslationbox_translate();
+            e.preventDefault();
         }
     });
   

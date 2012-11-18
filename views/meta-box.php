@@ -95,12 +95,12 @@ function selectAll (textarea) {
 </script>
 
 <div>
-    <label for="untranslated_text">Original:</label>
+    <label for="untranslated_text">Original:</label><br/>
     <textarea id="untranslated_text" cols="27" rows="2"></textarea>
 </div>
 
 <div>
-    <label for="translated_text">Translated:</label>
+    <label for="translated_text">Translated:</label><br/>
     <textarea id="translated_text" cols="27" rows="2" readonly="true" onClick="selectAll(this);"></textarea>
 </div>
 

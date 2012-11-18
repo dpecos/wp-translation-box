@@ -12,26 +12,35 @@ global $post;
 	font-style: italic
 }
 </style>
-<script src="https://www.google.com/jsapi?key=AIzaSyCHN5MMkFj4oGXrLc24XWGRM2XNtjiIYmI"></script>
+<script src="<?= plugin_dir_url(__FILE__) ?>/msTranslator.php"></script>
 <script>
-google.load("language", "1");
-
 var is_text_modified = false;
 
 function wptranslationbox_translate() {
     untranslated_text = jQuery('#untranslated_text').val();
 
     if (untranslated_text != "") {
-		google.language.translate(untranslated_text, jQuery('#source_lang').val(), jQuery('#dest_lang').val(), function(result) {
-	    	if (!result.error) {
-	            jQuery('#translated_text').attr("value", result.translation);
-	        } else {
-	            alert(result.error.code + ": " + result.error.message);
-	        }
-	    });
-    }
+        var url = "http://api.microsofttranslator.com/V2/Ajax.svc/Translate" +
+                "?appId=Bearer " + encodeURIComponent(window.mstranslator_accessToken) +
+                "&from=" + encodeURIComponent(jQuery('#source_lang').val()) +
+                "&to=" + encodeURIComponent(jQuery('#dest_lang').val()) +
+                "&text=" + encodeURIComponent(untranslated_text) +
+                "&oncomplete=wptranslationbox_translationCallback";
 
-    is_text_modified = false;
+	jQuery.ajax({
+		url: url,
+		dataType: 'jsonp'
+	});
+    }
+}
+
+function wptranslationbox_translationCallback(response) {
+	if (response !== "") {
+		jQuery('#translated_text').attr("value", response);
+	} else {
+		alert("ERROR: Could not get translation");
+	}
+	is_text_modified = false;
 }
 
 function wptranslationbox_switch() {
@@ -56,13 +65,13 @@ String.prototype.capitalize = function(){ //v1.0
 
 jQuery(document).ready(function() {
     var output = [];
-    jQuery.each(google.language.Languages, function(name, code) {
+    jQuery.each(window.mstranslator_langs, function(code, name) {
       output.push('<option value="'+ code +'">'+ name.capitalize() +'</option>');
     });
     
     <?php
-    $source_lang = get_option("googletranslate_source_language");
-    $target_lang = get_option("googletranslate_target_language");
+    $source_lang = get_option("wptranslation_source_language");
+    $target_lang = get_option("wptranslation_target_language");
     ?>
 
     jQuery('#source_lang').html(output.join('')).attr("value", "<?php echo $source_lang ?>").css("width", "8em").css("margin-bottom", "5px");
@@ -106,9 +115,9 @@ function selectAll (textarea) {
 
 <div>
     <select id="source_lang"></select> 
-	<img src="../wp-content/plugins/wp-googletranslate-box/img/switch.png" onclick="javascript:wptranslationbox_switch()" alt="Switch languages" style="vertical-align: middle"/>
+	<img src="../wp-content/plugins/wp-translation-box/img/switch.png" onclick="javascript:wptranslationbox_switch()" alt="Switch languages" style="vertical-align: middle"/>
 	<select id="dest_lang"></select>
-	<img src="../wp-content/plugins/wp-googletranslate-box/img/clear.jpg" onclick="javascript:wptranslationbox_clear()" alt="Clear boxes" style="vertical-align: middle; margin-left: 5px"/>
+	<img src="../wp-content/plugins/wp-translation-box/img/clear.jpg" onclick="javascript:wptranslationbox_clear()" alt="Clear boxes" style="vertical-align: middle; margin-left: 5px"/>
     <input type="button" class="button tagadd" onclick="javascript:wptranslationbox_translate();" value="<?= __('Translate')?>"/>
-    <a href="http://danielpecos.com/projects/wp-googletranslate-box">+info</a>
+    <a href="http://danielpecos.com/projects/wp-translation-box">+info</a>
 </div>

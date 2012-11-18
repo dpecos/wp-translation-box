@@ -1,0 +1,22 @@
+Description
+===========
+
+WordPress plugin that displays a box in the "Add New Post" page that allows you 
+to quickly translate any text from and to different languages.
+
+Its purpose is to assist you when you are writing in a different language other 
+than your mother tongue and you need to use a translation service as quickly as possible.
+
+This software is opensource, but I do encourage people to donate to help me spend 
+time improving existing apps and release new ones. I really appreciate your 
+donations and I always send a personal thank you email as soon as the donation 
+is received. Thanks again to everyone who has already donated!
+
+[Donate here!](http://danielpecos.com/projects/wp-translation-box/)
+
+Installation
+============
+
+1. Upload `wp-translation-box` directory to the `/wp-content/plugins/` directory
+2. Activate the plugin through the 'Plugins' menu in WordPress
+3. Now you will get a new box at left side of the "Add New Post" page ;-)

@@ -4,7 +4,7 @@
  Plugin URI: http://danielpecos.com/projects/wp-translation-box
  Description: Displays a box in the "Add New Post" page that allows you to quickly translate any text from and to different languages.
  Author: Daniel Pecos Martinez
- Version: 1.6
+ Version: 1.8
  Author URI: http://danielpecos.com/
  */
 if( !class_exists( 'WPTranslationBox' ) ) {

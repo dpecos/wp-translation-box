@@ -1,9 +1,9 @@
 === Plugin Name ===
 Contributors: dpecos
-Donate link: http://danielpecos.com/projects/wp-translation-box/
+Donate link: https://danielpecos.com/projects/wp-translation-box/
 Tags: translation, editor, microsoft-translator, translate
 Requires at least: 3.0.0
-Tested up to: 3.8
+Tested up to: 4.6.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -44,6 +44,12 @@ Not at all.
 2. Settings page
 
 == Changelog ==
+
+= 1.8 =
+* Fixed: auth tokens now using new API
+
+= 1.7 =
+* Fixed: loading insecure (non-SSL) scripts in HTTPs domains
 
 = 1.6 =
 * Fix in error handling code
